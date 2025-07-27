@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: config-server
+
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "threaddump"
+  endpoint:
+    health:
+      show-details: always
+      group:
+        custom:
+          include:
+            - diskSpace
+            - ping
+          show-components: always
+          show-details: always
+info: 
+  application:
+    name: E-Comm-Order-Service
+    description: A demo application with custom info
+    version: @project.version@ # Dynamically pull from Maven/Gradle project version
+  environment:
+    enabled: true # Exposes environment properties
+  custom:
+    message: Custom info!
+    author: Niteesh Nadiger
+
