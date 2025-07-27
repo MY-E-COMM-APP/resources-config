@@ -1,11 +1,13 @@
 spring:
   application:
     name: config-server
-  config: 
-    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      uri:
+      - 
 
 server:
-  port: 8071
+  port: 8888
 
 management:
   endpoints:
@@ -25,7 +27,7 @@ management:
           show-details: always
 info: 
   application:
-    name: E-Comm-Order-Service
+    name: E-Comm-Config-Server
     description: A demo application with custom info
     version: @project.version@ # Dynamically pull from Maven/Gradle project version
   environment:
