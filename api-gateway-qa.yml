@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: api-gateway
+  config: 
+    import: optional:configserver:http://localhost:8888
+    
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: ${SERVER_PORT:8764}
+  
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "threaddump"
+  endpoint:
+    health:
+      show-details: always
+      group:
+        custom:
+          include:
+            - diskSpace
+            - ping
+          show-components: always
+          show-details: always
+info: 
+  application:
+    name: E-Comm-API-GATEWAY-Server
+    description: A demo application with custom info
+    version: 1.0
+  environment:
+    enabled: true # Exposes environment properties
+  custom:
+    message: Custom info!
+    author: Niteesh Nadiger
