@@ -1,29 +1,30 @@
 services:
-  accounts:
-    image: "eazybytes/accounts:s4"
-    container_name: accounts-ms
+  eureka-server:
+    image: "niteeshnadiger/eureka-server:v1"
+    container_name: eureka-server
     ports:
-      - "8080:8080"
+      - "8761:8761"
     deploy:
       resources:
         limits:
           memory: 700m
     networks:
-      - eazybank
-  loans:
-    image: "eazybytes/loans:s4"
-    container_name: loans-ms
+      - ecomnetwork
+  config-server:
+    image: "niteeshnadiger/config-server:v1"
+    container_name: config-server
     ports:
-      - "8090:8090"
+      - "8888,:8888"
     deploy:
       resources:
         limits:
           memory: 700m
     networks:
-      - eazybank
-  cards:
-    image: "eazybytes/cards:s4"
-    container_name: cards-ms
+      - ecomnetwork
+
+  api-gateway:
+    image: "niteeshnadiger/api-gateway:v1"
+    container_name: api-gateway
     ports:
       - "9000:9000"
     deploy:
@@ -31,7 +32,40 @@ services:
         limits:
           memory: 700m
     networks:
-      - eazybank
+      - ecomnetwork
+  order-service:
+    image: "niteeshnadiger/order-service:v1"
+    container_name: order-service
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - ecomnetwork
+  inventory-service:
+    image: "niteeshnadiger/inventory-service:v1"
+    container_name: inventory-service
+    ports:
+      - "8085:8085"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - ecomnetwork
+  payment-service:
+    image: "niteeshnadiger/payment-service:v1"
+    container_name: payment-service
+    ports:
+      - "8090:8090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - ecomnetwork
 networks:
-  eazybank:
+  ecomnetwork:
     driver: "bridge"
